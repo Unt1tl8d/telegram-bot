@@ -14,12 +14,12 @@ TG_CHAT_ID = os.getenv('TG_CHAT_ID')
 def timer(chat_id, question):
     delay = parse(question)
     message_id = bot.send_message(chat_id, "Таймер запущен!!!")
-    bot.create_countdown(delay, time_to_end, chat_id=chat_id, message_id=message_id, delay=delay)
+    bot.create_countdown(delay, counting, chat_id=chat_id, message_id=message_id, delay=delay)
     time.sleep(delay+0.5)
     bot.send_message(chat_id, 'Время вышло!!!')
 
 
-def time_to_end(second_left, chat_id, message_id, delay):
+def counting(second_left, chat_id, message_id, delay):
     bot.update_message(chat_id, message_id, "Осталось секунд: {}\n ".format(second_left) + render_progressbar(delay, delay - second_left))
 
 

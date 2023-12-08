@@ -5,11 +5,8 @@ from dotenv import load_dotenv, find_dotenv
 import time
 
 
-
 load_dotenv(find_dotenv())
 
-TG_TOKEN = os.getenv('TG_TOKEN')
-TG_CHAT_ID = os.getenv('TG_CHAT_ID')
 
 def timer(chat_id, question):
     delay = parse(question)
@@ -30,8 +27,11 @@ def render_progressbar(total, iteration, prefix='', suffix='', length=30, fill='
     filled_length = int(length * iteration // total)
     pbar = fill * filled_length + zfill * (length - filled_length)
     return '{0} |{1}| {2}% {3}'.format(prefix, pbar, percent, suffix)
-    
 
-bot = ptbot.Bot(TG_TOKEN)
+
+bot = ptbot.Bot(os.getenv('TG_TOKEN'))
 bot.reply_on_message(timer)
 bot.run_bot()
+
+if __name__ == '__main__':
+    main()
